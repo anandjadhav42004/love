@@ -16,15 +16,31 @@
 <body>
     <div id="heart-container"></div>
 
+    <!-- First Landing Page (The Envelope/Reveal) -->
+    <div id="landing-page" class="landing-page">
+        <div class="envelope-wrapper">
+            <div class="heart-lock">❤️</div>
+            <h1 class="landing-title">For Sakshi...</h1>
+            <p class="landing-hint">P.S. Please turn on your volume 🎵</p>
+            <button id="enter-btn" class="btn-enter">Open My Heart</button>
+        </div>
+    </div>
+
     <div class="audio-control" id="audio-toggle">
-        <span class="icon">🎵</span>
+        <span class="music-waves">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
         <span class="track-name">Spring Snow - 10CM</span>
     </div>
+    <!-- Song: Spring Snow - 10CM (Lovely Runner OST) -->
     <audio id="bg-music" loop>
-        <source src="https://files.catbox.moe/5m9sh7.mp3" type="audio/mpeg">
+        <source src="https://www.mboxdrive.com/10CM%20-%20Spring%20Snow.mp3" type="audio/mpeg">
     </audio>
 
-    <main class="container">
+    <main class="container hidden-content">
         <section class="hero fade-in">
             <h1 class="main-heading">Love You, My Soulmate 💖</h1>
             <p class="subheading">“This page exists because my heart couldn’t stay quiet anymore, Sakshi.”</p>
