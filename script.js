@@ -46,23 +46,35 @@ document.addEventListener('DOMContentLoaded', () => {
             bgMusic.play().then(() => {
                 isPlaying = true;
                 audioToggle.querySelector('.icon').innerText = '🎵';
-            }).catch(e => console.log("Audio play blocked by browser"));
+                // Remove all other trigger listeners once playing
+                document.removeEventListener('click', playMusic);
+                document.removeEventListener('scroll', playMusic);
+                document.removeEventListener('touchstart', playMusic);
+                document.removeEventListener('mousemove', playMusic);
+            }).catch(e => {
+                console.log("Audio play blocked by browser. Waiting for interaction.");
+            });
         }
     }
 
-    // Start music on first click anywhere
-    document.addEventListener('click', playMusic, { once: true });
+    // Multiple triggers to ensure it starts as soon as Sakshi does ANYTHING
+    document.addEventListener('click', playMusic);
+    document.addEventListener('scroll', playMusic);
+    document.addEventListener('touchstart', playMusic);
+    document.addEventListener('mousemove', playMusic);
 
     audioToggle.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent document click from triggering twice
+        e.stopPropagation();
         if (isPlaying) {
             bgMusic.pause();
             audioToggle.querySelector('.icon').innerText = '🔇';
+            isPlaying = false;
         } else {
-            bgMusic.play().catch(e => console.log("Music play failed"));
-            audioToggle.querySelector('.icon').innerText = '🎵';
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                audioToggle.querySelector('.icon').innerText = '🎵';
+            }).catch(e => console.log("Manual play failed"));
         }
-        isPlaying = !isPlaying;
     });
 
     // 4. Fade-in Animations
