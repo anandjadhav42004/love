@@ -38,14 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
         maybeBtn.style.top = y + 'px';
     });
 
-    // 3. Audio Toggle
+    // 3. Audio Toggle & Background Play
     let isPlaying = false;
-    audioToggle.addEventListener('click', () => {
+
+    function playMusic() {
+        if (!isPlaying) {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                audioToggle.querySelector('.icon').innerText = '🎵';
+            }).catch(e => console.log("Audio play blocked by browser"));
+        }
+    }
+
+    // Start music on first click anywhere
+    document.addEventListener('click', playMusic, { once: true });
+
+    audioToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent document click from triggering twice
         if (isPlaying) {
             bgMusic.pause();
             audioToggle.querySelector('.icon').innerText = '🔇';
         } else {
-            bgMusic.play().catch(e => console.log("Audio play blocked by browser"));
+            bgMusic.play().catch(e => console.log("Music play failed"));
             audioToggle.querySelector('.icon').innerText = '🎵';
         }
         isPlaying = !isPlaying;
