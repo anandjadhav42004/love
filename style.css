@@ -217,15 +217,28 @@ body {
     top: 20px;
     right: 20px;
     background: white;
-    width: 45px;
+    padding: 0 15px;
     height: 45px;
-    border-radius: 50%;
+    border-radius: 25px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
     cursor: pointer;
     box-shadow: var(--soft-shadow);
     z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.audio-control:hover {
+    transform: scale(1.05);
+    background: #fff0f3;
+}
+
+.track-name {
+    font-size: 0.8rem;
+    color: var(--secondary-pink);
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 /* Animations */
